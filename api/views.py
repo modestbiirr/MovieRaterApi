@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.authentication import TokenAuthentication
@@ -10,10 +10,9 @@ from django.contrib.auth.models import User
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    authentication_classes = (TokenAuthentication, )
-    permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = (AllowAny,)
 
 
 class MovieViewSet(viewsets.ModelViewSet):
